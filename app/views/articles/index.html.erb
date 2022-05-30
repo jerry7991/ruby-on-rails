@@ -1,0 +1,29 @@
+Our blog has <%= Article.public_count %> articles and counting!
+
+
+<h1>Hello, Rails!</h1>
+<ul>
+    <%  @articles.each do |article| %>
+    <% unless article.archived? %>
+      
+    <li>
+      <%=article.id%>&nbsp;
+      <%=article.title%>&nbsp;
+      <%=article.body%> &nbsp;
+      <%=article.created_at%>
+      <%=article.updated_at%>
+      <ul>
+        <li><a  href="<%=article_path(article)%>" >show</a></li>
+        <li><p><%=link_to article.title, article%>(show using link_to)</p></li>
+        <li><%=link_to "Destroy", article_path(article),  data: {
+          "turbo_method": :delete,
+          "turbo_confirm": "Are you sure?"
+        }%></li>
+      </ul>
+    </li>
+
+    <% end %>
+    <%end%>
+
+      <p><%=link_to "create new article",  new_article_path%> create new
+</ul>
